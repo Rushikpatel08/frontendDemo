@@ -32,7 +32,7 @@ export class AppComponent implements OnInit{
   mobiles:any[]=[];
   loadMobile()
   {
-    this.http.get<any[]>(`http://localhost:8080/mobile/getallmobile`).subscribe({
+    this.http.get<any[]>(`http://54.167.213.57:8080/mobile/getallmobile`).subscribe({
       next:data=>
       {
         this.mobiles=data;
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit{
   showForm=false;
   deleteMobile(id:any)
   {
-    this.http.delete(`http://localhost:8080/mobile/deletemobile/${id}`).subscribe({
+    this.http.delete(`http://54.167.213.57:8080/mobile/deletemobile/${id}`).subscribe({
       next:data=>{
         this.loadMobile();
       },
@@ -62,7 +62,7 @@ export class AppComponent implements OnInit{
 
     if(this.mobile.id)
     {
-      this.http.put(`http://localhost:8080/mobile/updatemobile/${this.mobile.id}`,this.mobile).subscribe({
+      this.http.put(`http://54.167.213.57:8080/mobile/updatemobile/${this.mobile.id}`,this.mobile).subscribe({
 
         next:data=>{
           this.mobile={id:null,brand:'',model:'',price:''};
@@ -73,7 +73,7 @@ export class AppComponent implements OnInit{
       });
     }
     else {
-    this.http.post(`http://localhost:8080/mobile/addmobile`,this.mobile).subscribe({
+    this.http.post(`http://54.167.213.57:8080/mobile/addmobile`,this.mobile).subscribe({
       next:data=>{
         alert("Mobile added successfully!");
         this.mobile={id:null,brand:'',model:'',price:''};
