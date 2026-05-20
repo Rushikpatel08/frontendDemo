@@ -33,8 +33,8 @@ export class AppComponent implements OnInit{
   mobiles:any[]=[];
   loadMobile()
   {
-    this.http.get<any[]>(`http://34.204.75.205:8081/mobile/getallmobile`).subscribe({
-    //this.http.get<any[]>(`/api/mobile/getallmobile`).subscribe({
+    //his.http.get<any[]>(`http://34.204.75.205:8081/mobile/getallmobile`).subscribe({
+    this.http.get<any[]>(`/api/mobile/getallmobile`).subscribe({
       next:data=>
       {
         this.mobiles=data;
@@ -46,8 +46,8 @@ export class AppComponent implements OnInit{
   showForm=false;
   deleteMobile(id:any)
   {
-    this.http.delete(`http://34.204.75.205:8081/mobile/deletemobile/${id}`).subscribe({
-    //this.http.delete(`/api/mobile/deletemobile/${id}`).subscribe({
+    //this.http.delete(`http://34.204.75.205:8081/mobile/deletemobile/${id}`).subscribe({
+    this.http.delete(`/api/mobile/deletemobile/${id}`).subscribe({
       next:data=>{
         this.loadMobile();
       },
