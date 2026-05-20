@@ -33,7 +33,7 @@ export class AppComponent implements OnInit{
   mobiles:any[]=[];
   loadMobile()
   {
-    this.http.get<any[]>(`http://271.0.0.1:8081/mobile/getallmobile`).subscribe({
+    this.http.get<any[]>(`http://34.204.75.205:8081/mobile/getallmobile`).subscribe({
     //this.http.get<any[]>(`/api/mobile/getallmobile`).subscribe({
       next:data=>
       {
