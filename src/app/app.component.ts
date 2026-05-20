@@ -34,7 +34,7 @@ export class AppComponent implements OnInit{
   loadMobile()
   {
     //this.http.get<any[]>(`http://34.204.75.205:8081/mobile/getallmobile`).subscribe({
-    this.http.get<any[]>(`${environment.apiUrl}/mobile/getallmobile`).subscribe({
+    this.http.get<any[]>(`/api/mobile/getallmobile`).subscribe({
       next:data=>
       {
         this.mobiles=data;
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit{
   deleteMobile(id:any)
   {
     //this.http.delete(`http://34.204.75.205:8081/mobile/deletemobile/${id}`).subscribe({
-    this.http.delete(`${environment.apiUrl}/mobile/deletemobile/${id}`).subscribe({
+    this.http.delete(`/api/mobile/deletemobile/${id}`).subscribe({
       next:data=>{
         this.loadMobile();
       },
@@ -66,7 +66,7 @@ export class AppComponent implements OnInit{
     if(this.mobile.id)
     {
       //this.http.put(`http://34.204.75.205:8081/mobile/updatemobile/${this.mobile.id}`,this.mobile).subscribe({
-this.http.put(`${environment.apiUrl}/mobile/updatemobile/${this.mobile.id}`,this.mobile).subscribe({
+this.http.put(`/api/mobile/updatemobile/${this.mobile.id}`,this.mobile).subscribe({
 
         next:data=>{
           this.mobile={id:null,brand:'',model:'',price:''};
@@ -78,7 +78,7 @@ this.http.put(`${environment.apiUrl}/mobile/updatemobile/${this.mobile.id}`,this
     }
     else {
     //this.http.post(`http://34.204.75.205:8081/mobile/addmobile`,this.mobile).subscribe({
-    this.http.post(`${environment.apiUrl}/mobile/addmobile`,this.mobile).subscribe({
+    this.http.post(`/api/mobile/addmobile`,this.mobile).subscribe({
       next:data=>{
         alert("Mobile added successfully!");
         this.mobile={id:null,brand:'',model:'',price:''};
