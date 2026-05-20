@@ -52,30 +52,31 @@ pipeline {
 
         /* ================= DEPLOY TO EC2 + NGINX ================= */
         stage('Deploy to EC2 + Nginx') {
-            steps {
-                sh '''
-                echo "Starting deployment..."
+    steps {
+        sh '''
+        echo "Cleaning EC2 nginx folder..."
 
-                # Clean old files on EC2
-                ssh -o StrictHostKeyChecking=no -i ${KEY} ${EC2_USER}@${EC2_HOST} "
-                    sudo rm -rf /tmp/dist &&
-                    sudo rm -rf /usr/share/nginx/html/*
-                "
+        ssh -o StrictHostKeyChecking=no -i ${KEY} ${EC2_USER}@${EC2_HOST} "
+            sudo rm -rf /tmp/* &&
+            sudo rm -rf /usr/share/nginx/html/*
+        "
 
-                # Copy new build to EC2
-                scp -o StrictHostKeyChecking=no -i ${KEY} -r dist/* ${EC2_USER}@${EC2_HOST}:/tmp/
+        echo "Copying Angular build..."
 
-                # Move to nginx folder
-                ssh -o StrictHostKeyChecking=no -i ${KEY} ${EC2_USER}@${EC2_HOST} "
-                    sudo cp -r /tmp/* /usr/share/nginx/html/ &&
-                    sudo chmod -R 755 /usr/share/nginx/html &&
-                    sudo systemctl restart nginx
-                "
+        scp -o StrictHostKeyChecking=no -i ${KEY} -r dist/frontend-mobile/browser/* ${EC2_USER}@${EC2_HOST}:/tmp/
 
-                echo "Deployment completed"
-                '''
-            }
-        }
+        echo "Deploying to Nginx..."
+
+        ssh -o StrictHostKeyChecking=no -i ${KEY} ${EC2_USER}@${EC2_HOST} "
+            sudo cp -r /tmp/* /usr/share/nginx/html/ &&
+            sudo chmod -R 755 /usr/share/nginx/html &&
+            sudo systemctl restart nginx
+        "
+
+        echo "Deployment completed"
+        '''
+    }
+}
 
         /* ================= HEALTH CHECK ================= */
         stage('Health Check') {
